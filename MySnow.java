@@ -18,7 +18,7 @@ class MyPanels extends Panel implements Runnable{
 	int x[] = new int[300] ;
 	int y[] = new int[300] ;
 	
-	//结构方法
+	//陆谩鹿鹿路陆路篓
 	public void aaa(){
 		for(int i = 0 ; i < 300 ; i ++){
 			x[i] = (int)(Math.random()*1024) ;
@@ -28,7 +28,7 @@ class MyPanels extends Panel implements Runnable{
 	public void paint(Graphics g){
 		g.setColor(Color.WHITE) ;
 		for (int i = 0; i < 300; i ++) {
-	g.drawString("草泥马", x[i], y[i]) ;
+	g.drawString("*", x[i], y[i]) ;
 		}
 	}
 	public void run() {
