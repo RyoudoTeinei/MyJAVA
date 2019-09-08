@@ -18,7 +18,7 @@ class MyPanels extends Panel implements Runnable{
 	int x[] = new int[300] ;
 	int y[] = new int[300] ;
 	
-	//陆谩鹿鹿路陆路篓
+	//结构方法
 	public void aaa(){
 		for(int i = 0 ; i < 300 ; i ++){
 			x[i] = (int)(Math.random()*1024) ;

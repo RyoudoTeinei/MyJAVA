@@ -1,4 +1,4 @@
-package ForTest;
+package ForSave;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -14,13 +14,18 @@ public class MyGame {
 		Thread t = new Thread(mp) ;
 		t.start() ;
 		
+		w.addKeyListener(mp) ;
+		mp.addKeyListener(mp) ;
+		
 		w.show() ;
 	}
 }
-class MyPanelsxs extends Panel implements Runnable {
+class MyPanelsxs extends Panel implements Runnable , KeyListener{
 	int x[] = new int[10] ;
 	int y[] = new int[10] ;
 	char c[] = new char[10] ;
+	int score = 1000 ;
+		
 	MyPanelsxs() {
 		for (int i = 0 ; i < 10 ; i ++){
 			x[i] = (int)(Math.random()*300) ;
@@ -32,6 +37,8 @@ class MyPanelsxs extends Panel implements Runnable {
 		for(int i = 0 ; i < 10 ; i ++){
 			g.drawString(new Character(c[i]).toString(), x[i] , y[i]) ;
 		}
+		g.setColor(Color.RED) ;
+		g.drawString("你的成绩是："+score, 5, 15) ;
 	}
 	public void run() {
 		while(true){
@@ -41,6 +48,7 @@ class MyPanelsxs extends Panel implements Runnable {
 					y[i] = 0 ;
 					x[i] = (int)(Math.random()*300) ;
 					c[i] = (char)(Math.random()*26+97) ;
+					score -= 100 ;
 				}
 			}
 			try{
@@ -50,14 +58,24 @@ class MyPanelsxs extends Panel implements Runnable {
 		}
 	}
 	public void keyPressed(KeyEvent arg0) {
-		//将用户输入的字符存入keyC中
-		char keyC = arg0.getKeyChar();
-		//扫描整个数组，看看有没有匹配的字符
-		for(int i = 0 ; i < 10 ; i ++){
-			for(keyC++c[i]){
-				//找到力
-				y[i]
+		char keyC = arg0.getKeyChar() ;
+		int nowY = -1 ;
+		int nowIndex = -1 ;
+		for(int i = 0 ; i < 10 ; i ++ ) {
+			if(keyC==c[i]){
+				if(y[i]>nowY){
+					nowY = y[i] ;
+					nowIndex = i ;
+				}
 			}
+		}
+		if(nowIndex!=-1){
+			y[nowIndex] = 0 ;
+			x[nowIndex] = (int)(Math.random()*300) ;
+			c[nowIndex] = (char)(Math.random()*26+97) ;
+			score += 10 ;
+			}else {
+				score -= 100 ;
 		}
 	}
 }
