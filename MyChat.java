@@ -1,95 +1,61 @@
 package ForTest;
-
 import java.awt.*;
 
-import java.awt.event.*;
-
-import javax.swing.* ;
-
-
+import javax.swing.*;
 
 public class MyChat {
-	public static void main(String args[]) {
+	public static void main(String args[]){
 		JFrame w = new JFrame() ;
-		w.setSize(400 , 300) ;
-		w.getContentPane().setBackground(Color.GRAY) ;
+		w.setSize(400,650);
 		
-		JButton x = new JButton("OK") ;
-		w.add(x) ;
+		JLabel labUser = new JLabel("用户名") ;
+		JLabel labPass = new JLabel("密码") ;
 		
-		MyPanelesss mp = new MyPanelesss() ;
-		w.add(mp) ;
+		JTextField txtUser = new JTextField() ;
+		JPasswordField txtPass = new JPasswordField() ;
 		
-		w.addMouseListener(mp) ;
-		mp.addMouseListener(mp) ;
+		JButton btnLogin = new JButton("登录") ;
+		JButton btnReg = new JButton("注册") ;
+		JButton btnCancel = new JButton("取消") ;
 		
-		w.setVisible(true) ;
-	}
-}
-class MyPanelesss extends Panel implements MouseListener{
-	boolean x = true ;
-	public void paint(Graphics g){
-		super.paint(g) ;
-		if(x){//为了上方而做的两条白线
-		g.setColor(Color.WHITE);
-		g.drawLine(80,100,80,170);
-		g.drawLine(80, 100, 270, 100);
-		//下面的黑线
-		g.setColor(Color.BLACK);
-		g.drawLine(80,170,270,170);
-		g.drawLine(270, 100, 270, 170);
-		}else{
-			g.setColor(Color.WHITE);
-			g.drawLine(80,170,270,170);
-			g.drawLine(270, 100, 270, 170);
-			g.setColor(Color.BLACK);
-			g.drawLine(80,100,80,170);
-			g.drawLine(80, 100, 270, 100);
+		JPanel panInput = new JPanel() ;
+        panInput.setLayout(new GridLayout(2 , 9)) ;
+		
+		panInput.add(labUser) ;
+		panInput.add(txtUser) ;
+		
+		panInput.add(labPass) ;
+		panInput.add(txtPass) ;
+		
+		JPanel panButton1 = new JPanel() ;
+		panButton1.setLayout(new FlowLayout()) ;
+		
+		panButton1.add(btnLogin);
+		panButton1.add(btnReg);
+		panButton1.add(btnCancel);
+		
+		w.setLayout(new BorderLayout()) ;
+		
+		w.add(panInput , BorderLayout.CENTER) ;
+		w.add(panButton1 , BorderLayout.SOUTH) ;
+	
+		w.setLocationRelativeTo(null);
+		w.setResizable(false);// 
+		
+		FlowLayout fl = new FlowLayout(FlowLayout.CENTER, 10, 10);
+        w.setLayout(fl);
+        
+		ImageIcon w1 = new ImageIcon("C:\\Users\\35425\\Downloads\\36a3c90aa143067caf39ce60e7506467.jpg") ;
+		JLabel labIcon = new JLabel(w1);
+		
+		Dimension dim = new Dimension(300,400);
+		labIcon.setPreferredSize(dim);
+
+		w.add(labIcon);
+
+		
+		w.setVisible(true);
 		}
 	}
 
-	public void addMouseListener(MyPanelesss mp) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-	
-	}
-	
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public void mousePressed(MouseEvent arg0) {
-		if(arg0.getX()>80&&arg0.getX()<270&&arg0.getY()>100&&arg0.getY()<170){
-			x = false ;
-			repaint() ;
-			}
-	
-		// TODO Auto-generated method stub
-	}		
-	public void mouseReleased(MouseEvent arg0) {
-		x = true ;
-		repaint() ;
-		// TODO Auto-generated method stub
-		
-	}
-    
-	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-}
