@@ -1,25 +1,42 @@
-package ForTest;
+package ForSave;
 import java.awt.*;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class MyChat {
+public class MyChat implements ActionListener {
+	JTextField txtUser = new JTextField() ;
+	JPasswordField txtPass = new JPasswordField();
 	public static void main(String args[]){
 		JFrame w = new JFrame() ;
-		w.setSize(400,650);
+		w.setSize(600,414);
+		w.setResizable(false);
+		w.getContentPane().setBackground(Color.lightGray);
 		
-		JLabel labUser = new JLabel("用户名") ;
-		JLabel labPass = new JLabel("密码") ;
+		JLabel labUser = new JLabel("用户名:") ;
+		JLabel labPass = new JLabel("密码:") ;
 		
-		JTextField txtUser = new JTextField() ;
-		JPasswordField txtPass = new JPasswordField() ;
+		final JTextField txtUser = new JTextField() ;
+        final JPasswordField txtPass = new JPasswordField() ;
+
 		
 		JButton btnLogin = new JButton("登录") ;
 		JButton btnReg = new JButton("注册") ;
 		JButton btnCancel = new JButton("取消") ;
+		btnLogin.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                txtUser.setText("请填写用户名");
+                txtPass.setText("请填写密码");
+            }
+        });
 		
+		MyChat e = new MyChat() ;
+		btnLogin.addActionListener(e);
+		btnReg.addActionListener(e);
+		btnCancel.addActionListener(e);
+
 		JPanel panInput = new JPanel() ;
-        panInput.setLayout(new GridLayout(2 , 9)) ;
+        panInput.setLayout(new GridLayout(2 , 2)) ;
 		
 		panInput.add(labUser) ;
 		panInput.add(txtUser) ;
@@ -39,23 +56,23 @@ public class MyChat {
 		w.add(panInput , BorderLayout.CENTER) ;
 		w.add(panButton1 , BorderLayout.SOUTH) ;
 	
-		w.setLocationRelativeTo(null);
-		w.setResizable(false);// 
-		
-		FlowLayout fl = new FlowLayout(FlowLayout.CENTER, 10, 10);
-        w.setLayout(fl);
-        
-		ImageIcon w1 = new ImageIcon("C:\\Users\\35425\\Downloads\\36a3c90aa143067caf39ce60e7506467.jpg") ;
+        ImageIcon w1 = new ImageIcon("D:\\JAVA\\Material\\MyChat!.png") ;
 		JLabel labIcon = new JLabel(w1);
 		
-		Dimension dim = new Dimension(300,400);
+		Dimension dim = new Dimension(600,270);
 		labIcon.setPreferredSize(dim);
 
-		w.add(labIcon);
+		w.add(labIcon , BorderLayout.NORTH);
 
 		
 		w.setVisible(true);
 		}
+
+	public void actionPerformed(ActionEvent arg0) {
+		System.out.println("事件响应") ;
+		// TODO Auto-generated method stub
+		
 	}
+}
 
 
