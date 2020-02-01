@@ -1,30 +1,24 @@
-package ForTest;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
+package ForSave;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.* ;
 
 public class MyChatPart2 extends JFrame implements ActionListener{
 	JTextField txtMess = new JTextField() ;
 	JComboBox cmbUser = new JComboBox() ;
 	JTextArea txtContent = new JTextArea() ;
-	MyChatPart2{
+	MyChatPart2(){
 		this.setSize(400,600) ;
-		this.setResizable(false) ;
 		this.getContentPane().setBackground(Color.white);
 		
-		JTextField txtMess = new JTextField() ;
-		
-		JComboBox cmbUser = new JComboBox() ;
 		JButton btnSend = new JButton("发送") ;
-		
-		JTextArea txtContent = new JTextArea() ;
 		
 		JScrollPane spContent = new JScrollPane(txtContent) ;//滚动条
 		
 		//监听
-		butSend.addActionListener(this) ;
+		btnSend.addActionListener(this) ;
 		
 		//小面板
 		JPanel panSmall = new JPanel() ;
@@ -35,15 +29,46 @@ public class MyChatPart2 extends JFrame implements ActionListener{
 		
 		//大面板
 		JPanel panBig = new JPanel() ;
-		panBig.setLayout(new GridLayout(2 ,2));
+		panBig.setLayout(new GridLayout(2 ,1));
 		
 		panBig.add(txtMess) ;
 		panBig.add(panSmall) ;
 		
-		w.setLayout(new BorderLayout());
-		w.add(panBig , BorderLayout.NORTH);
-		w.add(spContent , BorderLayout.CENTER) ;
+		this.setLayout(new BorderLayout());
+		this.add(panBig , BorderLayout.NORTH);
+		this.add(spContent , BorderLayout.CENTER) ;
 		
-		w.setVisible(true);
-		}
+		//读
+		try{
+			File f = new File("D:/LIFE IS SHORT,I USE JAVA") ;
+			
+			FileReader fr = new FileReader(f) ;
+			BufferedReader br = new BufferedReader(fr) ;
+			
+			while(br.ready()){
+				txtContent.append(br.readLine()+"\n");
+				
+			}
+		}catch(Exception e){}
+		
+	}
+	
+
+	public void actionPerformed(ActionEvent arg0) {
+		txtContent.append(txtMess.getText()+"\n");
+		
+		try{
+			File f = new File("D:/LIFE IS SHORT,I USE JAVA");
+			FileWriter fw = new FileWriter(f);
+			PrintWriter pw = new PrintWriter(fw) ;
+			
+			pw.println(txtMess.getText());
+			
+			pw.close();
+		}catch(Exception e){}
+		txtMess.setText("");
+		
+	}
+	    	
+
 }

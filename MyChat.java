@@ -1,39 +1,32 @@
 package ForSave;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+
 import javax.swing.*;
 
-public class MyChat implements ActionListener {
+import book_src.QQLogin;
+import book_src.QQMain;
+
+public class MyChat extends JFrame implements ActionListener {
 	JTextField txtUser = new JTextField() ;
 	JPasswordField txtPass = new JPasswordField();
-	public static void main(String args[]){
-		JFrame w = new JFrame() ;
-		w.setSize(600,414);
-		w.setResizable(false);
-		w.getContentPane().setBackground(Color.lightGray);
+	public MyChat() {
+		
+		this.setSize(600,414);
+		this.setResizable(false);
+		this.getContentPane().setBackground(Color.lightGray);
 		
 		JLabel labUser = new JLabel("用户名:") ;
 		JLabel labPass = new JLabel("密码:") ;
 		
-		final JTextField txtUser = new JTextField() ;
-        final JPasswordField txtPass = new JPasswordField() ;
-
-		
 		JButton btnLogin = new JButton("登录") ;
 		JButton btnReg = new JButton("注册") ;
 		JButton btnCancel = new JButton("取消") ;
-		btnLogin.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                txtUser.setText("请填写用户名");
-                txtPass.setText("请填写密码");
-            }
-        });
 		
-		MyChat e = new MyChat() ;
-		btnLogin.addActionListener(e);
-		btnReg.addActionListener(e);
-		btnCancel.addActionListener(e);
+		
+		btnLogin.addActionListener(this);
+		btnReg.addActionListener(this);
+		btnCancel.addActionListener(this);
 
 		JPanel panInput = new JPanel() ;
         panInput.setLayout(new GridLayout(2 , 2)) ;
@@ -51,10 +44,10 @@ public class MyChat implements ActionListener {
 		panButton1.add(btnReg);
 		panButton1.add(btnCancel);
 		
-		w.setLayout(new BorderLayout()) ;
+		this.setLayout(new BorderLayout()) ;
 		
-		w.add(panInput , BorderLayout.CENTER) ;
-		w.add(panButton1 , BorderLayout.SOUTH) ;
+		this.add(panInput , BorderLayout.CENTER) ;
+		this.add(panButton1 , BorderLayout.SOUTH) ;
 	
         ImageIcon w1 = new ImageIcon("D:\\JAVA\\Material\\MyChat!.png") ;
 		JLabel labIcon = new JLabel(w1);
@@ -62,17 +55,35 @@ public class MyChat implements ActionListener {
 		Dimension dim = new Dimension(600,270);
 		labIcon.setPreferredSize(dim);
 
-		w.add(labIcon , BorderLayout.NORTH);
+		this.add(labIcon , BorderLayout.NORTH);
 
-		
-		w.setVisible(true);
+		this.setVisible(true);
 		}
-
+	public static void main(String args[]){
+		MyChat w = new MyChat() ;
+		w.setVisible(true) ;
+	}
+	
+	
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println("事件响应") ;
-		// TODO Auto-generated method stub
-		
+		if(arg0.getActionCommand().equals("登录")){
+			String user = txtUser.getText() ;
+			String pass = txtPass.getText() ;
+			if(user.equals("aaa")&&pass.equals("111")){
+				MyChatPart2 w = new MyChatPart2() ;
+				w.setVisible(true) ;
+				this.setVisible(false) ;
+			}		}
+		if(arg0.getActionCommand().equals("注册")){
+			System.out.println("用户点击了注册") ;
+		}
+		if(arg0.getActionCommand().equals("取消")){
+			System.out.println("用户点击了取消") ;
+			this.setVisible(false);
+		}
 	}
 }
+
+
 
 
